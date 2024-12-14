@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "tictactoe",
+    "name": "T3",
     "slug": "tictactoe",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,6 +12,9 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "dk.t3",
+      "versionCode": 1,
+      "buildType": "apk",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -36,6 +39,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "5f598340-908d-48b9-952e-12106c490e0e"
+      }
     }
   }
 }
