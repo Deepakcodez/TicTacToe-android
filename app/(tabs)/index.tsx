@@ -1,34 +1,35 @@
-import { Button, Image, StyleSheet, Text, View } from 'react-native';
-
-import { HelloWave } from '@/components/HelloWave';
+import {  Image, StyleSheet,  View } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
 import GameCard from '@/components/ui/GameCard';
-import Wifi from '@/components/icons/Wifi';
 import { TouchableOpacity } from 'react-native';
+import {  useRouter } from 'expo-router';
 
 export default function HomeScreen() {
+  const router = useRouter();
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#5aadd2', dark: '#5aadd2' }}
       headerImage={
         <Image
           source={require('@/assets/images/headerImage.jpg')}
-          style={styles.reactLogo}
+          className='w-full h-full absolute left-0 bottom-0'
         />
       }>
-      <View style={styles.container}>
-        <TouchableOpacity onPress={() => console.log('Button pressed')}>
+      <View className='flex-1 flex-row justify-between items-center '>
+
+        <TouchableOpacity  onPress={() => router.push('/screens')} >
           <GameCard
             title="Offline"
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => console.log('Button pressed')}>
+
+        <TouchableOpacity  onPress={() => router.push('/screens/createRoom')}>
           <GameCard
             title="Online"
           />
         </TouchableOpacity>
+
+
 
       </View>
 
@@ -56,11 +57,5 @@ const styles = StyleSheet.create({
     gap: 8,
     marginBottom: 8,
   },
-  reactLogo: {
-    height: 178,
-    width: 430,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+
 });
