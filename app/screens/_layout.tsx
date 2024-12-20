@@ -10,7 +10,8 @@ const ScreenRoot = () => {
                 name="index"
                 options={{
                     headerShown: true,
-                    headerTitle: "Offlin Game",
+                    headerTitle: "T3",
+                     
                 }} />
             <Stack.Screen
                 name="createRoom"
@@ -26,3 +27,4 @@ const ScreenRoot = () => {
 };
 
 export default ScreenRoot;
+  

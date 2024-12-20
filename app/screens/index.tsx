@@ -1,5 +1,5 @@
 import OfflineGame from '@/components/OfflineGame';
-import { SafeAreaView, StyleSheet, Text } from 'react-native';
+import { SafeAreaView } from 'react-native';
 
 const Offline = () => {
     return (
