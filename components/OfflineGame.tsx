@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, } from "react-native";
 import ConfettiCannon from "react-native-confetti-cannon";
-import { GestureHandlerRootView, TextInput } from 'react-native-gesture-handler';
-import BottomSheet, { BottomSheetView, BottomSheetTextInput } from '@gorhom/bottom-sheet';
+import { GestureHandlerRootView,  } from 'react-native-gesture-handler';
+import BottomSheet, { BottomSheetView, } from '@gorhom/bottom-sheet';
 import OfflineGameTurnIndicater from "./ui/OfflineGameTurnIndicater";
 import DrawCard from "./ui/DrawCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+
 const OfflineGame = () => {
     const [board, setBoard] = useState<(string | null)[]>(Array(9).fill(null)); // Game board
+    const [boardColor, setBoardColor] = useState<string>("black");
     const [isXNext, setIsXNext] = useState(true); // Tracks whose turn it is
     const [winner, setWinner] = useState<string | null>(null); // Tracks the winner
     const [isDraw, setIsDraw] = useState(false); // Tracks if the game is a draw
@@ -69,11 +71,14 @@ const OfflineGame = () => {
         }
     }, []);
 
+  
+
     return (
         <GestureHandlerRootView style={styles.rootContainer}>
-            <View style={styles.container}>
+            <View style={styles.container} className={`${boardColor}`}>
                 {isDraw && <DrawCard />}
                 <OfflineGameTurnIndicater isXNext={isXNext} />
+                
                 <View style={styles.gameArea}>
                     <View style={styles.board}>
                         {board.map((value, index) => (
@@ -91,10 +96,10 @@ const OfflineGame = () => {
                 {winner && <ConfettiCannon count={200} origin={{ x: 150, y: 0 }} />}
                 <View className="flex flex-row justify-between items-center p-4">
                     <TouchableOpacity onPress={() => setShowStats(prev => prev === 1 ? -1 : 1)}>
-                        <MaterialCommunityIcons name="dots-triangle" size={30} color="black" />
+                        <MaterialCommunityIcons name="dots-triangle" size={30} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={restartGame}>
-                        <MaterialCommunityIcons name="restart" size={24} color="black" />
+                        <MaterialCommunityIcons name="restart" size={24} color="white" />
                     </TouchableOpacity>
                 </View>
 
@@ -114,7 +119,11 @@ const OfflineGame = () => {
             >
                 <BottomSheetView style={styles.bottomSheetContent}>
                     <View >
-                        <Text className="text-6xl font-bold  " style={{ color: "#c7c7c7", opacity: 30 }}>x wins</Text>
+                        <Text
+                            className="text-6xl font-bold  "
+                            style={{ color: "#c7c7c7", opacity: 30 }}>
+                            {winner ? winner : 'No'} wins
+                        </Text>
                         <Text>{xpoints} | {opoints}</Text>
                     </View>
                 </BottomSheetView>
@@ -131,7 +140,7 @@ type SquareProps = {
 
 const Square: React.FC<SquareProps> = ({ value, onPress }) => {
     return (
-        <TouchableOpacity style={styles.square} onPress={onPress}>
+        <TouchableOpacity style={styles.square} className="bg-white/70" onPress={onPress}>
             <Text style={styles.squareText}>{value}</Text>
         </TouchableOpacity>
     );
@@ -171,7 +180,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "center",
-        backgroundColor: "#f5f5f5",
         padding: 20,
     },
     gameArea: {
@@ -191,7 +199,6 @@ const styles = StyleSheet.create({
         height: 100,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#fff",
         borderWidth: 1,
         borderColor: "#ccc",
     },

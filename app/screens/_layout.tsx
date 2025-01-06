@@ -10,14 +10,14 @@ const ScreenRoot = () => {
                 name="index"
                 options={{
                     headerShown: true,
-                    headerTitle: "T3",
+                    headerTitle: "Offline Game",
                      
                 }} />
             <Stack.Screen
                 name="createRoom"
                 options={{
                     headerShown: true,
-                    headerTitle: "Create Room",
+                    headerTitle: "Online Game",
                 }}
             />
 
