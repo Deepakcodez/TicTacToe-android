@@ -10,7 +10,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const OfflineGame = () => {
     const [board, setBoard] = useState<(string | null)[]>(Array(9).fill(null)); // Game board
-    const [boardColor, setBoardColor] = useState<string>("black");
+    const [boardColor, setBoardColor] = useState<string>("bg-neutral-950");
     const [isXNext, setIsXNext] = useState(true); // Tracks whose turn it is
     const [winner, setWinner] = useState<string | null>(null); // Tracks the winner
     const [isDraw, setIsDraw] = useState(false); // Tracks if the game is a draw
@@ -74,7 +74,7 @@ const OfflineGame = () => {
   
 
     return (
-        <GestureHandlerRootView style={styles.rootContainer}>
+        <GestureHandlerRootView style={styles.rootContainer} >
             <View style={styles.container} className={`${boardColor}`}>
                 {isDraw && <DrawCard />}
                 <OfflineGameTurnIndicater isXNext={isXNext} />
@@ -109,8 +109,9 @@ const OfflineGame = () => {
                 index={showStats}
                 snapPoints={["1%", "20%"]}
                 onChange={handleSheetChanges}
+                backgroundStyle={{ backgroundColor: "#0f0f0f" }}
                 handleIndicatorStyle={{
-                    backgroundColor: "#ccc",
+                    backgroundColor: "#c7c7c7",
                     width: 50,
                     height: 5,
                     borderRadius: 10,
@@ -120,11 +121,10 @@ const OfflineGame = () => {
                 <BottomSheetView style={styles.bottomSheetContent}>
                     <View >
                         <Text
-                            className="text-6xl font-bold  "
-                            style={{ color: "#c7c7c7", opacity: 30 }}>
-                            {winner ? winner : 'No'} wins
+                            className="text-6xl font-bold  text-white/30">
+                            {xpoints > opoints ?  "X Lead": xpoints < opoints ? "O Lead" :' Draw'} 
                         </Text>
-                        <Text>{xpoints} | {opoints}</Text>
+                        <Text className="text-white">{xpoints} | {opoints}</Text>
                     </View>
                 </BottomSheetView>
             </BottomSheet>
@@ -140,8 +140,8 @@ type SquareProps = {
 
 const Square: React.FC<SquareProps> = ({ value, onPress }) => {
     return (
-        <TouchableOpacity style={styles.square} className="bg-white/70" onPress={onPress}>
-            <Text style={styles.squareText}>{value}</Text>
+        <TouchableOpacity  className="bg-violet-300/20 h-[6rem] aspect-square rounded-xl flex items-center justify-center" onPress={onPress}>
+            <Text style={styles.squareText} className="text-white/70 ">{value}</Text>
         </TouchableOpacity>
     );
 };
@@ -192,15 +192,16 @@ const styles = StyleSheet.create({
         width: 300,
         height: 300,
         flexDirection: "row",
+        justifyContent: "center",
         flexWrap: "wrap",
+        gap : 4,
     },
     square: {
         width: 100,
         height: 100,
         justifyContent: "center",
         alignItems: "center",
-        borderWidth: 1,
-        borderColor: "#ccc",
+  
     },
     squareText: {
         fontSize: 36,

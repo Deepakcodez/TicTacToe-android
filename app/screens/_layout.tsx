@@ -20,6 +20,13 @@ const ScreenRoot = () => {
                     headerTitle: "Online Game",
                 }}
             />
+            <Stack.Screen
+                name="gameRoom"
+                options={{
+                    headerShown: true,
+                    headerTitle: "Room",
+                }}
+            />
 
 
         </Stack>

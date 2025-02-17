@@ -4,9 +4,12 @@ import { useEffect, useState } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { v4 as uuidv4 } from 'uuid';
+import { useRoute } from '@react-navigation/native';
+import { useRouter } from 'expo-router';
 const CreateRoom = () => {
   const [roomId, setRoomId] = useState<string>('');
   const socket = useSocket();
+  const router = useRouter();
 
   const generateShortId = (): string => {
     const fullUuid = uuidv4(); // Generate a full UUID
@@ -42,8 +45,12 @@ const CreateRoom = () => {
       return;
     }
 
-    console.log('Creating room:', roomId);
     socket.emit('createRoom', roomId);
+
+    // router.push({
+    //   pathname: '/screens/gameRoom',
+    //   params: { socketId: socket.id, roomId: id },
+    // });
   };
 
 
@@ -78,6 +85,9 @@ const CreateRoom = () => {
       </View>
 
     </SafeAreaView>
+    
+
+   
   )
 }
 export default CreateRoom
